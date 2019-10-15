@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nitrate concentration & Cancer rate analysis</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+  <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>  
+
+  <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.3.0/dist/esri-leaflet.js"
+    integrity="sha512-1tScwpjXwwnm6tTva0l0/ZgM3rYNbdyMj5q6RSQMbNX6EUMhYDE3pMRGZaT41zHEvLoWEK7qFEJmZDOoDMU7/Q=="
+    crossorigin=""></script>
+
+  <!-- Load Turf.js from CDN -->
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
+    <!-- Load Simple Statistics from CDN-->
+    <script src='https://unpkg.com/simple-statistics@7.0.2/dist/simple-statistics.min.js'></script>
+
+    <!-- jQuery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Load custom stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div id="map"></div>
+    <div id="input-pane" class="leaflet-bar">
+      <div>
+        <h4>High nitrate concentrations in drinking water are a health hazard. Recently a possible cancer risk in adults from nitrate (and nitrite) has emerged, but the magnitude of the risk is unknown.</h4>
+        <label>This application allows users to explore the relationship between nitrate and cancer through spatial analysis. </label>
+        <p>Data on cancers are collected by cataloging the location of all cancer occurrences over a ten-year period and are summarized to census tracts by being devided by population. We also assembled a database of nitrate levels in a group of test wells throughout the county</p>
+        <p>To explore the relationship between nitrate level and cancer rate, first choose a distance exponent k and cell value for interpolation. Click button <strong>Interpolate</strong> to generate the nitrate surface level. Click button <strong>Calculate</strong> to analyzing the relationship and explore the estimation error.</p>
+      </div>
+      <div>
+        <label>k value: &nbsp;</label><input id="kvalue" type="number" value=5 min=1 max=10 /> &nbsp;
+        <label>cell size: </label><input id="cellsize" type="number" value=6 min=1 max=10 /> &nbsp;
+        <button id="interpolateBtn">Interpolate</button> <br><br>
+        <!-- <label>remove </"label><button onclick="remove()">remove</button> <br> -->
+        <!-- <label>2. </label><button onclick="aggregationCal()">Aggregation</button><br> -->
+        <label>Linear regression and map error: &nbsp;</label>
+        <button id="regressionBtn">Calculate</button><br>
+        <label>slope: </label><label id='slope'></label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label>intercept: </label><label id='intercept'></label>
+    </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
