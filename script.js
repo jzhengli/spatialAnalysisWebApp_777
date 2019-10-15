@@ -263,7 +263,7 @@ var weightVal, cellSize;
 var nitrateSurface;
 //1.interpolation =====================
 $('#interpolateBtn').click(async function (){
-    $.blockUI({message:'Interpolating...',
+    $.blockUI({message:'<h1><img src="https://media.giphy.com/media/17mNCcKU1mJlrbXodo/giphy.gif" width="30" height="30"/> Interpolating... </h1>',
     css: { 
         border: 'none', 
         padding: '15px', 
@@ -312,7 +312,7 @@ async function interploate(){
 }
 
 $('#regressionBtn').click(async function(){
-    $.blockUI({message:'Calculating...',
+    $.blockUI({message:'<h1><img src="https://media.giphy.com/media/17mNCcKU1mJlrbXodo/giphy.gif" width="30" height="30"/> Calculating...</h1>',
     css: { 
         border: 'none', 
         padding: '15px', 
