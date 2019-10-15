@@ -262,7 +262,24 @@ function updateRegressionErrorLegend() {
 var weightVal, cellSize;
 var nitrateSurface;
 //1.interpolation =====================
-$('#interpolateBtn').on("click", function (){
+$('#interpolateBtn').click(async function (){
+    $.blockUI({message:'Interpolating...',
+    css: { 
+        border: 'none', 
+        padding: '15px', 
+        backgroundColor: '#000', 
+        '-webkit-border-radius': '10px', 
+        '-moz-border-radius': '10px', 
+        opacity: .8, 
+        color: '#fff'} 
+    });
+
+    await interploate();
+    $.unblockUI();
+    $(this).prop("disabled", true);
+});
+
+async function interploate(){
     //get featureCollection from nitrate well layer
     wellPointsLayer.query().run(function(error, featureCollection){
         if (error) {
@@ -292,18 +309,29 @@ $('#interpolateBtn').on("click", function (){
         console.log("nitrate surface data added to layer.")
     });
     updateNitrateLevelLegend();
-});
+}
 
-$('#regressionBtn').on("click", function(){
-    aggregateCal();
-    updateRegressionErrorLegend();
+$('#regressionBtn').click(async function(){
+    $.blockUI({message:'Calculating...',
+    css: { 
+        border: 'none', 
+        padding: '15px', 
+        backgroundColor: '#000', 
+        '-webkit-border-radius': '10px', 
+        '-moz-border-radius': '10px', 
+        opacity: .8, 
+        color: '#fff'}
+    });
+    await aggregateCal();
+    $.unblockUI();
+    $(this).prop("disabled", true);
 });
 
 //2.regression =====================
 //2.1aggregate nitrate level values to census tracts
 var nitrateCentroids = [];
 var aggregatedUnit;
-function aggregateCal(){
+async function aggregateCal(){
     //check if nitrateSurface is null
     if(nitrateSurface == null){
         console.log(nitrateSurface)
@@ -386,7 +414,6 @@ function mapError(units){
     //add calculated error data to error layer in the map
     errorLayer.addData(units);
     console.log("regression error data added to layer.")
+    updateRegressionErrorLegend();
 };
 //end of analysis =======================================================
-
-
